@@ -4,7 +4,16 @@
     <TargetFramework>netstandard1.4</TargetFramework>
     <Company />
     <Authors>Andre Carlucci</Authors>
-    <Description>.net standard version of</Description>
+    <Description>.NETStandard client version of Microsoft Cognitive Services.
+APIs: 
+- Emotion
+- Vision</Description>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageProjectUrl>https://github.com/andrecarlucci/cognitiveservices</PackageProjectUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/andrecarlucci/cognitiveservices/master/LICENSE</PackageLicenseUrl>
+    <RepositoryUrl>ttps://github.com/andrecarlucci/cognitiveservices</RepositoryUrl>
+    <PackageTags>netstandard, dotnet, netcore, core, .netcore</PackageTags>
+    <Version>0.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

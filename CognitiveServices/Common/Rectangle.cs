@@ -5,6 +5,28 @@ namespace CognitiveServices.Common {
         public int Width { get; set; }
         public int Height { get; set; }
 
+        public static Rectangle FromString(string @string) {
+            if (string.IsNullOrWhiteSpace(@string)) {
+                return null;
+            }
+            var box = @string.Split(',');
+            if (box.Length != 4) {
+                return null;
+            }
+            if (int.TryParse(box[0], out int left) &&
+                int.TryParse(box[1], out int top) &&
+                int.TryParse(box[2], out int width) &&
+                int.TryParse(box[3], out int height)) {
+                return new Rectangle() {
+                    Left = left,
+                    Height = height,
+                    Top = top,
+                    Width = width
+                };
+            }
+            return null;
+        }
+
         public override bool Equals(object o) {
             var other = o as Rectangle;
             if (other == null) return false;
