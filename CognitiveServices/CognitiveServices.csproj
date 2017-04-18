@@ -5,9 +5,7 @@
     <Company />
     <Authors>Andre Carlucci</Authors>
     <Description>.NETStandard client version of Microsoft Cognitive Services.
-APIs: 
-- Emotion
-- Vision</Description>
+APIs: Emotion, Vision</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/andrecarlucci/cognitiveservices</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/andrecarlucci/cognitiveservices/master/LICENSE</PackageLicenseUrl>
