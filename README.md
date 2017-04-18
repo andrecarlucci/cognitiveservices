@@ -3,7 +3,7 @@
 .NETStandard client version of Microsoft Cognitive Services
 
 Implemented:
-- Emotions
+- Emotions (port of https://github.com/Microsoft/Cognitive-Emotion-Windows)
 
 ```
 using (var stream = File.OpenRead("faceImage.bmp")) {
