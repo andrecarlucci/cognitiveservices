@@ -187,10 +187,10 @@ namespace CognitiveServices.Vision {
             
         }
         private async Task<T> ProcessAsyncResponse<T>(HttpResponseMessage response) {
-            var mediaType = response.Content.Headers.ContentType.MediaType;
+            var mediaType = response.Content.Headers?.ContentType?.MediaType;
             using (response) {
                 if (response.IsSuccessStatusCode) {
-                    if (response.Content.Headers.ContentLength > 0) {
+                    if (response.Content.Headers?.ContentLength > 0) {
                         using (var stream = await response.Content.ReadAsStreamAsync()) {
                             if (stream == null) {
                                 return default(T);
