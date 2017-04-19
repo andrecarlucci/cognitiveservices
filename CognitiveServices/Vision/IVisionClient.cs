@@ -4,23 +4,7 @@ using System.Threading.Tasks;
 
 namespace CognitiveServices.Vision
 {
-    public interface IVisionServiceClient {
-        /// <summary>
-        /// Analyzes the image.
-        /// </summary>
-        /// <param name="url">The URL.</param>
-        /// <param name="visualFeatures">The visual features. If none are specified, 'Categories' will be analyzed.</param>
-        /// <returns>The AnalysisResult object.</returns>
-        //Task<AnalysisResult> AnalyzeImageAsync(string url, string[] visualFeatures = null);
-
-        /// <summary>
-        /// Analyzes the image.
-        /// </summary>
-        /// <param name="imageStream">The image stream.</param>
-        /// <param name="visualFeatures">The visual features. If none are specified, 'Categories' will be analyzed.</param>
-        /// <returns>The AnalysisResult object.</returns>
-        //Task<AnalysisResult> AnalyzeImageAsync(Stream imageStream, string[] visualFeatures = null);
-
+    public interface IVisionClient {
         /// <summary>
         /// Analyzes the image.
         /// </summary>

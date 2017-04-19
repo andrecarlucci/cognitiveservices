@@ -1,29 +1,22 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using CognitiveServices.Common;
-using CognitiveServices.Emotions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 
 namespace CognitiveServices {
     public abstract class ServiceClient {
-        protected class UrlRequest {
-            public string Url { get; set; }
-        }
-
-        public class WrappedClientError {
-            public ClientError Error { get; set; }
-        }
 
         protected string ApiRoot { get; set; }
         protected string AuthKey { get; set; }
         protected string AuthValue { get; set; }
 
-        private static string OperationLocation = "Operation-Location";
+        protected static string OperationLocationHeaderName = "Operation-Location";
 
         protected static CamelCasePropertyNamesContractResolver s_defaultResolver = new CamelCasePropertyNamesContractResolver();
 
@@ -33,13 +26,14 @@ namespace CognitiveServices {
             ContractResolver = s_defaultResolver
         };
 
-        private readonly HttpClient _httpClient;
+        protected HttpClient HttpClient { get; }
 
         protected ServiceClient() : this(new HttpClient()) {
         }
 
         protected ServiceClient(HttpClient httpClient) {
-            _httpClient = httpClient;
+            HttpClient = httpClient;
+            HttpClient.Timeout = TimeSpan.FromMinutes(2);
         }
 
         
@@ -52,7 +46,7 @@ namespace CognitiveServices {
         }
 
         protected async Task<TResponse> SendAsync<TRequest, TResponse>(HttpMethod method, string apiUrl, TRequest requestBody) {
-            var urlIsRelative = System.Uri.IsWellFormedUriString(apiUrl, System.UriKind.Relative);
+            var urlIsRelative = System.Uri.IsWellFormedUriString(apiUrl, UriKind.Relative);
             var requestUri = urlIsRelative ? ApiRoot + apiUrl : apiUrl;
             var request = new HttpRequestMessage(method, requestUri);
             request.Headers.Add(AuthKey, AuthValue);
@@ -67,7 +61,7 @@ namespace CognitiveServices {
                 }
             }
 
-            var response = await _httpClient.SendAsync(request).ConfigureAwait(false);
+            var response = await HttpClient.SendAsync(request).ConfigureAwait(false);
             if (response.IsSuccessStatusCode) {
                 string responseContent = null;
                 if (response.Content != null) {
@@ -83,7 +77,7 @@ namespace CognitiveServices {
                 var output = System.Activator.CreateInstance<TResponse>();
                 if (output is VideoOperation) {
                     var operation = output as VideoOperation;
-                    operation.Url = response.Headers.GetValues(OperationLocation).First();
+                    operation.Url = response.Headers.GetValues(OperationLocationHeaderName).First();
                     return output;
                 }
 
@@ -99,6 +93,14 @@ namespace CognitiveServices {
 
             response.EnsureSuccessStatusCode();
             return default(TResponse);
+        }
+
+        protected class UrlRequest {
+            public string Url { get; set; }
+        }
+
+        public class WrappedClientError {
+            public ClientError Error { get; set; }
         }
     }
 }
