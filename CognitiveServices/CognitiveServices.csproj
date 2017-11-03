@@ -9,7 +9,7 @@ APIs: Emotion, Vision</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageProjectUrl>https://github.com/andrecarlucci/cognitiveservices</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.githubusercontent.com/andrecarlucci/cognitiveservices/master/LICENSE</PackageLicenseUrl>
-    <RepositoryUrl>ttps://github.com/andrecarlucci/cognitiveservices</RepositoryUrl>
+    <RepositoryUrl>https://github.com/andrecarlucci/cognitiveservices</RepositoryUrl>
     <PackageTags>netstandard, dotnet, netcore, core, .netcore</PackageTags>
     <Version>0.3.0-alpha1</Version>
     <AssemblyVersion>0.3.0.0</AssemblyVersion>
